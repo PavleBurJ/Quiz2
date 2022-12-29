@@ -6,12 +6,6 @@ pipeline {
 
   }
   stages {
-    stage('pull') {
-      steps {
-        git(url: 'https://github.com/PavleBurJ/Quiz2.git', branch: 'master')
-      }
-    }
-
     stage('get version') {
       steps {
         sh 'cat ./Quiz2-master/pom.xml | grep "*-SNAPSHOT"'
