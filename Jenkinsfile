@@ -4,7 +4,7 @@ pipeline {
     stage('get version') {
       steps {
         sh '''#!/bin/sh
-mvn-version .'''
+cat pom.xml | grep "<version>*-SNAPSHOT</version>"'''
       }
     }
 
