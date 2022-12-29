@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('get version') {
       steps {
-        sh 'find .'
+        sh 'cat pom.xml | grep "*-SNAPSHOT"'
       }
     }
 
