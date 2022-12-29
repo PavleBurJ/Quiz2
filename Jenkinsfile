@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('get version') {
       steps {
-        sh '''#!/bin/sh
-mvn --version'''
+        sh 'cat pom.xml | grep "^    <version>.*</version>$" | awk -F\'[><]\' \'{print $3}\''
       }
     }
 
