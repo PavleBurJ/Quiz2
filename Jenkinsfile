@@ -4,7 +4,7 @@ pipeline {
     stage('get version') {
       steps {
         sh '''#!/bin/sh
-value=`cat blob/master/pom.xml`
+value=`cat Quiz2-master/pom.xml`
 echo $version'''
       }
     }
