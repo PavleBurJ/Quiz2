@@ -1,11 +1,25 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'worker-02'
+    }
+
+  }
   stages {
-    stage('get version') {
+    stage('pull') {
       steps {
-        sh 'cat pom.xml | grep "^    <version>.*</version>$" | awk -F\'[><]\' \'{print $3}\''
+        git(url: 'https://github.com/PavleBurJ/Quiz2.git', branch: 'master')
       }
     }
 
+    stage('get version') {
+      steps {
+        sh 'cat pom.xml | grep "*-SNAPSHOT"'
+      }
+    }
+
+  }
+  environment {
+    node = 'worker'
   }
 }
