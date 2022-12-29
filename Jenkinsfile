@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('get version') {
       steps {
-        sh 'cat ./Quiz2-master/pom.xml | grep "*-SNAPSHOT"'
+        sh 'find .'
       }
     }
 
