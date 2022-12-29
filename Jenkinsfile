@@ -4,8 +4,8 @@ pipeline {
     stage('get version') {
       steps {
         sh '''#!/bin/sh
-value=`cat target/version.txt`
-echo "$value"'''
+value=`cat blob/master/pom.xml`
+echo $version'''
       }
     }
 
