@@ -1,23 +1,28 @@
 pipeline {
-    agent {label 'worker-03'}
+    agent {
+        worker-03 {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
-        stage('determine maven version') {agent{label 'worker-03'}
-        steps{
-            print "maven version"
-            sh '''
-cat /root/jenkins/workspace/BlueOcean_master/pom.xml | grep "SNAPSHOT"
-'''
-            }
-        }
         stage('Build') {
-          steps {
-            sh 'mvn -Dmaven.test.failure.ignore=true install'
-          }
-          post {
-            success {
-              junit 'target/surefire-reports/**/*.xml'
+            steps {
+                sh 'mvn -B -DskipTests clean package'
             }
-          }
         }
-}
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('version') { 
+            steps {
+                sh 'cat /root/jenkins/workspace/BlueOcean_master/pom.xml | grep "SNAPSHOT"' 
+            }
+        }
+    }
 }
