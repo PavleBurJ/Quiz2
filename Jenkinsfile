@@ -5,7 +5,7 @@ pipeline {
         steps{
             print "maven version"
             sh '''
-cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'
+cat /root/jenkins/workspace/BlueOcean_master/pom.xml | grep "^<version>.*</version>$" | awk -F'[><]' '{print $3}'
 '''
             }
         }
