@@ -9,5 +9,13 @@ cat /root/jenkins/workspace/BlueOcean_master/pom.xml | grep "SNAPSHOT"
 '''
             }
         }
+        stage('run maven') {agent{label 'worker-03'}
+        steps{
+            print "run maven"
+            sh '''
+sh 'mvn -B -DskipTests clean package'
+'''
+            }
+        }
 }
 }
