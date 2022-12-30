@@ -1,9 +1,5 @@
 pipeline {
     agent{label 'worker-03'}
-        tools {
-        maven 'mavenHome'
-        jdk 'JavaHome'
-    }
     stages {
     stage ('Build') {
             steps {
@@ -16,10 +12,5 @@ pipeline {
             sh 'cat /root/jenkins/workspace/BlueOcean_master/pom.xlm | grep "SNAPSHOT"'
             }
  }
-                    post {
-                success {
-                    echo 'Now Archiving'
-                }
-            }
   }
 }
