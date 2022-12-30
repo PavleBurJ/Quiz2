@@ -13,7 +13,7 @@ pipeline {
         stage('check version') {agent{label 'worker-03'}
         steps{
             print "check version"
-            sh '''  '''
+            sh ''' cat /root/jenkins/workspace/BlueOcean_master/pom.xlm | grep "SNAPSHOT" '''
             }
  }
   }
