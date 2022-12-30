@@ -1,9 +1,13 @@
 pipeline {
     agent{label 'worker-03'}
+        tools {
+        maven '$mavenHome'
+        jdk '$JavaHome'
+    }
     stages {
     stage ('Build') {
             steps {
-                sh 'mvn clean install' 
+                sh 'mvn -f /root/jenkins/workspace/BlueOcean_master/pom.xml clean install' 
             }
     }
         stage('check version') {agent{label 'worker-03'}
@@ -12,5 +16,10 @@ pipeline {
             sh 'cat /root/jenkins/workspace/BlueOcean_master/pom.xlm | grep "SNAPSHOT"'
             }
  }
+                    post {
+                success {
+                    echo 'Now Archiving'
+                }
+            }
   }
 }
