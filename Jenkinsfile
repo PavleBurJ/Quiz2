@@ -1,8 +1,8 @@
 pipeline {
     agent{label 'worker-03'}
         tools {
-        maven '$mavenHome'
-        jdk '$JavaHome'
+        maven 'mavenHome'
+        jdk 'JavaHome'
     }
     stages {
     stage ('Build') {
