@@ -1,16 +1,31 @@
 pipeline {
-    agent{label 'worker-03'}
-    stages {
-    stage ('Build') {
-            steps {
-                sh 'mvn -f /root/jenkins/workspace/BlueOcean_master/pom.xml clean install' 
-            }
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
+        }
     }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
         stage('check version') {agent{label 'worker-03'}
         steps{
             print "check version"
             sh 'cat /root/jenkins/workspace/BlueOcean_master/pom.xlm | grep "SNAPSHOT"'
             }
  }
-  }
+    }
 }
