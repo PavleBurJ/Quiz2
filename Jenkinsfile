@@ -5,7 +5,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5'))
         }
     stages {
-        stage('determine maven version') {agent{label 'worker-02'}
+        stage('determine maven version') {agent{label 'worker-03'}
         steps{
             print "maven version"
             sh '''
