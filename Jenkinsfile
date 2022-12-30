@@ -1,28 +1,20 @@
 pipeline {
-    agent {
-        label{worker-03} {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
+    agent{label 'worker-03'}
+    options { 
+        buildDiscarder(logRotator(numToKeepStr: '5'))
         }
-    }
-    options {
-        skipStagesAfterUnstable()
-    }
     stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
+        stage('run maven') {agent{label 'worker-03'}
+        steps{
+            print "run maven"
+            sh '''  '''
             }
         }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+        stage('check version') {agent{label 'worker-03'}
+        steps{
+            print "check version"
+            sh '''  '''
             }
-        }
-        stage('version') { 
-            steps {
-                sh 'cat /root/jenkins/workspace/BlueOcean_master/pom.xml | grep "SNAPSHOT"' 
-            }
-        }
-    }
+ }
+  }
 }
