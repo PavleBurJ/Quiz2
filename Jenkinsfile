@@ -1,5 +1,5 @@
 pipeline {
-    agent {agent{label 'worker-03'}
+    agent {label 'worker-03'}
     stages {
         stage('determine maven version') {agent{label 'worker-03'}
         steps{
