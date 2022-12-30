@@ -14,3 +14,4 @@ cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}'
             }
         }
 }
+}
