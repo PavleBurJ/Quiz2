@@ -1,12 +1,11 @@
 pipeline {
     agent{label 'worker-03'}
-    options { 
-        buildDiscarder(logRotator(numToKeepStr: '5'))
-        }
-        stage ('Build') {
+    stages {
+    stage ('Build') {
             steps {
                 sh 'mvn clean install' 
             }
+    }
         stage('check version') {agent{label 'worker-03'}
         steps{
             print "check version"
